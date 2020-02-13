@@ -1,4 +1,7 @@
 
+- repo: wsdjeg/dein-ui.vim
+- repo: rafi/awesome-vim-colorschemes
+
 
 # ==========================================
 # Commands

@@ -1,6 +1,3 @@
-" https://github.com/rafi/vim-config
-" Maintainer: Rafael Bodill
-
 " Runtime and Plugins
 " ===
 
@@ -57,7 +54,7 @@ call s:source_file('config/init.vim')
 call s:source_file('config/plugins/all.vim')
 
 " Initialize all my configurations
-"call s:source_file('config/general.vim')
+call s:source_file('config/general.vim')
 "call s:source_file('config/filetype.vim')
 "call s:source_file('config/mappings.vim')
 "call s:source_file('config/theme.vim')
