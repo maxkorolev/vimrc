@@ -1,6 +1,6 @@
 
 call defx#custom#option('_', {
-	\ 'winwidth': 50,
+	\ 'winwidth': 70,
 	\ 'split': 'vertical',
 	\ 'direction': 'topleft',
 	\ 'show_ignored_files': 0,
@@ -27,7 +27,8 @@ call defx#custom#column('git', {
 call defx#custom#column('mark', { 'readonly_icon': '', 'selected_icon': '' })
 
 call defx#custom#column('filename', {
-      \ 'max_width': -90,
+      \ 'max_width': '70',
+      \ 'min_width': '70',
       \ })
 
 " defx-icons plugin
@@ -98,8 +99,8 @@ function! s:defx_mappings() abort
 	setlocal signcolumn=no
 	setlocal cursorline
 
-	nnoremap <silent><buffer><expr> <CR>  <SID>defx_toggle_tree() . 'j'
-	nnoremap <silent><buffer><expr> l     <SID>defx_toggle_tree() . 'j'
+	nnoremap <silent><buffer><expr> <CR>  <SID>defx_toggle_tree() . 'j' 
+	nnoremap <silent><buffer><expr> l     <SID>defx_toggle_tree() . 'j' 
 	nnoremap <silent><buffer><expr> h     defx#do_action('close_tree')
 	nnoremap <silent><buffer><expr> t     defx#do_action('open_tree_recursive')
 	nnoremap <silent><buffer><expr> P     defx#do_action('open', 'pedit')
