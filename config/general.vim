@@ -46,6 +46,8 @@ if has('clipboard')
 	set clipboard& clipboard+=unnamedplus
 endif
 
+set runtimepath+=/usr/local/opt/fzf
+
 " }}}
 
 " Vim Directories {{{
@@ -84,4 +86,107 @@ set shiftwidth=2  " column offset when using keys '>' and '<' in normal mode.
 
 " }}}
 
+" Timing {{{
+" ------
+set timeout ttimeout
+set timeoutlen=750  " Time out on mappings
+set updatetime=400  " Idle time to write swap and trigger CursorHold
+set ttimeoutlen=10  " Time out on key codes
 
+" }}}
+
+" Searching {{{
+" ---------
+set ignorecase      " Search ignoring case
+set smartcase       " Keep case when searching with *
+set infercase       " Adjust case in insert completion mode
+set incsearch       " Incremental search
+set wrapscan        " Searches wrap around the end of the file
+set showmatch       " Jump to matching bracket
+set matchpairs+=<:> " Add HTML brackets to pair matching
+set matchtime=1     " Tenths of a second to show the matching paren
+set cpoptions-=m    " showmatch will wait 0.5s or until a char is typed
+set showfulltag     " Show tag and tidy search in completion
+"set complete=.      " No wins, buffs, tags, include scanning
+
+if exists('+inccommand')
+	set inccommand=nosplit
+endif
+
+if executable('rg')
+	set grepformat=%f:%l:%m
+	let &grepprg = 'rg --vimgrep' . (&smartcase ? ' --smart-case' : '')
+elseif executable('ag')
+	set grepformat=%f:%l:%m
+	let &grepprg = 'ag --vimgrep' . (&smartcase ? ' --smart-case' : '')
+endif
+
+" }}}
+
+" Editor UI {{{
+" --------------------
+set noshowmode          " Don't show mode in cmd window
+set shortmess=aoOTI     " Shorten messages and don't show intro
+set scrolloff=5         " Keep at least 2 lines above/below
+set sidescrolloff=5     " Keep at least 5 lines left/right
+set number            " Don't show line numbers
+set noruler             " Disable default status ruler
+set list                " Show hidden characters
+
+set showtabline=2       " Always show the tabs line
+set winwidth=30         " Minimum width for active window
+set winminwidth=10      " Minimum width for inactive windows
+set winheight=4         " Minimum height for active window
+set winminheight=1      " Minimum height for inactive window
+set pumheight=15        " Pop-up menu's line height
+set helpheight=12       " Minimum help window height
+set previewheight=12    " Completion preview height
+
+set showcmd             " Show command in status line
+set cmdheight=2         " Height of the command line
+set cmdwinheight=5      " Command-line lines
+set equalalways         " Resize windows on split or close
+set laststatus=2        " Always show a status line
+set colorcolumn=80      " Highlight the 80th character limit
+set display=lastline
+
+if has('folding')
+	set foldenable
+	set foldmethod=syntax
+	set foldlevelstart=99
+endif
+
+" UI Symbols
+" icons:  ▏│ ¦ ╎ ┆ ⋮ ⦙ ┊ 
+set showbreak=↪
+set listchars=tab:\▏\ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
+"set fillchars=vert:▉,fold:─
+
+if has('patch-7.4.314')
+	" Do not display completion messages
+	set shortmess+=c
+endif
+
+if has('patch-7.4.1570')
+	" Do not display message when editing files
+	set shortmess+=F
+endif
+
+if has('conceal') && v:version >= 703
+	" For snippet_complete marker
+	set conceallevel=2 concealcursor=niv
+endif
+
+if exists('&pumblend')
+	" pseudo-transparency for completion menu
+	set pumblend=20
+endif
+
+if exists('&winblend')
+	" pseudo-transparency for floating window
+	set winblend=20
+endif
+
+" }}}
+
+" vim: set foldmethod=marker ts=2 sw=2 tw=80 noet :
