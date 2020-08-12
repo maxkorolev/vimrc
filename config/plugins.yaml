@@ -1,6 +1,12 @@
 
+- repo: tpope/vim-surround
+- repo: itchyny/vim-cursorword
 - repo: wsdjeg/dein-ui.vim
 - repo: rafi/awesome-vim-colorschemes
+
+- repo: andymass/vim-matchup
+  hook_add: 
+    let g:matchup_matchparen_deferred = 1
 
 - repo: vim-airline/vim-airline
   hook_add: |
@@ -24,7 +30,17 @@
 - repo: junegunn/fzf.vim
   hook_add: |
     let g:fzf_nvim_statusline = 0
+    let g:fzf_preview_window = ''
 
+
+# ==========================================
+# Completion
+# ----------
+
+- repo: neoclide/coc.nvim
+  merge: 0
+  rev: release
+  hook_add: source $VIM_PATH/config/plugins/coc.vim
 
 # ==========================================
 # Commands
@@ -36,10 +52,27 @@
 
 - { repo: kristijanhusak/defx-icons, on_source: defx.nvim }
 
+- repo: preservim/nerdcommenter
+- repo: kana/vim-operator-user  # only autoload functions, lazy by nature
+
+- repo: kana/vim-operator-replace
+  depends: vim-operator-user
+  on_map: { vnx: <Plug> }
+
+
 # ==========================================
 # GIT
 # --------
 - { repo: tpope/vim-fugitive}
+- repo: sodapopcan/vim-twiggy
+  depends: vim-fugitive
+  hook_add: |
+    let g:twiggy_num_columns = 50
+    let g:twiggy_split_method = 'topleft'
+    let g:twiggy_local_branch_sort = 'mru'
+    let g:twiggy_remote_branch_sort = 'date'
+- { repo: junegunn/gv.vim, depends: vim-fugitive }
+
 - repo: tveskag/nvim-blame-line
   hook_add: |
     autocmd BufEnter * EnableBlameLine

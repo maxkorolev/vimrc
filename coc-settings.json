@@ -1,0 +1,26 @@
+{
+  "diagnostic": {
+    "level": "warning",
+    "errorSign": "✗",
+    "warningSign" :"⚠️",
+    "maxWindowHight": 300
+  },
+  "coc": {
+    "preferences": {
+      "formatOnSaveFiletypes": ["scala", "javascript", "css", "vue", "html"]
+    }
+  },
+  "list": {
+    "insertMappings": {
+        "<C-n>": "normal:j",
+        "<C-p>": "normal:k"
+    },
+    "source" : {
+      "grep": {
+        "command": "ag"
+      }
+    }
+  },
+  "prettier.disableLanguages": [],
+  "html.format.enable": true
+}
