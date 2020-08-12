@@ -31,6 +31,9 @@ cnoreabbrev Qa qa
 cnoreabbrev Bd bd
 cnoreabbrev bD bd
 
+nnoremap ) :<C-u>cnext<CR>
+nnoremap ( :<C-u>cprevious<CR>
+
 " Improve scroll, credits: https://github.com/Shougo
 nnoremap <expr> zz (winline() == (winheight(0)+1) / 2) ?
 	\ 'zt' : (winline() == 1) ? 'zb' : 'zz'

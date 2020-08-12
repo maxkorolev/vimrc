@@ -1,4 +1,9 @@
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme onedark
+
+hi CocUnderline gui=None term=None
+highlight CocErrorHighlight guisp=#542d2d guibg=#542d2d
+highlight CocWarningHighlight guisp=#423926 guibg=#423926
  
 function! CommitQF(...)
     " Get the commit hash if it was specified
