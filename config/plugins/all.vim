@@ -19,10 +19,15 @@ if dein#tap('incsearch.vim')
   let g:incsearch#auto_nohlsearch = 1
   map n  <Plug>(incsearch-nohl-n)
   map N  <Plug>(incsearch-nohl-N)
-  map *  <Plug>(incsearch-nohl-*)
-  map #  <Plug>(incsearch-nohl-#)
-  map g* <Plug>(incsearch-nohl-g*)
-  map g# <Plug>(incsearch-nohl-g#)
+  map *   <Plug>(incsearch-nohl)<Plug>(asterisk-z*)
+  map g*  <Plug>(incsearch-nohl)<Plug>(asterisk-gz*)
+  map #   <Plug>(incsearch-nohl)<Plug>(asterisk-z#)
+  map g#  <Plug>(incsearch-nohl)<Plug>(asterisk-gz#)
+
+  map z*  <Plug>(incsearch-nohl0)<Plug>(asterisk-*)
+  map gz* <Plug>(incsearch-nohl0)<Plug>(asterisk-g*)
+  map z#  <Plug>(incsearch-nohl0)<Plug>(asterisk-#)
+  map gz# <Plug>(incsearch-nohl0)<Plug>(asterisk-g#)
 endif
 
 if dein#tap('vim-gitgutter')
