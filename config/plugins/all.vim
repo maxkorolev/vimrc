@@ -73,3 +73,8 @@ if dein#tap('vim-operator-replace')
 	xmap p <Plug>(operator-replace)
 endif
 
+if dein#tap('vim-expand-region') "{{{
+  xmap v <Plug>(expand_region_expand)
+  xmap V <Plug>(expand_region_shrink)
+endif
+

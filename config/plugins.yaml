@@ -96,3 +96,4 @@
 # ---------
 - { repo: haya14busa/incsearch.vim, on_map: { nv: <Plug> }}
 - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> }}
+- { repo: terryma/vim-expand-region, on_map: { x: <Plug> }}
