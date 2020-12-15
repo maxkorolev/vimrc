@@ -43,10 +43,10 @@ if has('mac')
 		\ }
 endif
 
-if has('clipboard')
+" if has('clipboard')
 	 " set clipboard& clipboard+=unnamedplus
-	 set clipboard=unnamed
-endif
+	" set clipboard=unnamed
+" endif
 
 set runtimepath+=/usr/local/opt/fzf
 

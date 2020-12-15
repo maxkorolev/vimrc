@@ -12,6 +12,7 @@ augroup user_plugin_filetype " {{{
 
 	" Configuration for vim-scala
 	au BufRead,BufNewFile *.sbt set filetype=scala
+	au BufRead,BufNewFile *.conf set filetype=hocon
 
 	" Highlight current line only on focused window
 	autocmd WinEnter,InsertLeave * if &ft !~# 'denite' | set cursorline | endif

@@ -1,9 +1,7 @@
 
 if dein#tap('defx.nvim')
-	nnoremap <silent> <LocalLeader>e
-		\ :<C-u>Defx -toggle<CR>
-	nnoremap <silent> <LocalLeader>a
-		\ :<C-u>Defx -search=`expand('%:p')`<CR>
+	nnoremap <silent> <LocalLeader>e :<C-u>Defx -toggle<CR>
+	nnoremap <silent> <LocalLeader>a :<C-u>Defx -search=`expand('%:p')`<CR>
 endif
 
 if dein#tap('fzf.vim')
@@ -78,3 +76,21 @@ if dein#tap('vim-expand-region') "{{{
   xmap V <Plug>(expand_region_shrink)
 endif
 
+if dein#tap('lightline.vim')
+  function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+  endfunction
+
+  let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'filename', 'gitbranch', 'cocstatus', 'currentfunction' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+endif
