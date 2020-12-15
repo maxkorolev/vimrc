@@ -8,13 +8,33 @@
   hook_add: 
     let g:matchup_matchparen_deferred = 1
 
-- repo: vim-airline/vim-airline
-  hook_add: |
-    let g:airline_powerline_fonts=1
-    let g:airline_extensions = ['branch', 'coc']
-    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-- repo: vim-airline/vim-airline-themes
+- repo: itchyny/lightline.vim
+#   hook_add:
+#     function! CocCurrentFunction()
+#       return get(b:, 'coc_current_function', '')
+#     endfunction
+#
+#     let g:lightline = {
+#       \ 'colorscheme': 'wombat',
+#       \ 'active': {
+#       \   'left': [ [ 'mode', 'paste' ],
+#       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+#       \ },
+#       \ 'component_function': {
+#       \   'cocstatus': 'coc#status',
+#       \   'currentfunction': 'CocCurrentFunction'
+#       \ },
+#       \ }
+# - repo: liuchengxu/eleline.vim
+#   hook_add:
+#     let g:airline_powerline_fonts = 1
+# - repo: vim-airline/vim-airline
+#   hook_add: |
+#     let g:airline_powerline_fonts=1
+#     let g:airline_extensions = ['branch', 'coc']
+#     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+#     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+# - repo: vim-airline/vim-airline-themes
 
 - repo: christoomey/vim-tmux-navigator
   if: "! (has('win32') || has('win64'))"
@@ -52,8 +72,11 @@
 
 - { repo: kristijanhusak/defx-icons, on_source: defx.nvim }
 
-- repo: preservim/nerdcommenter
 - repo: kana/vim-operator-user  # only autoload functions, lazy by nature
+- repo: preservim/nerdcommenter
+  hook_add: |
+    let g:NERDCustomDelimiters = {  'hocon': { 'left': '//' } }
+
 
 - repo: kana/vim-operator-replace
   depends: vim-operator-user
