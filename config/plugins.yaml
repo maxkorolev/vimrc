@@ -3,6 +3,7 @@
 - repo: itchyny/vim-cursorword
 - repo: wsdjeg/dein-ui.vim
 - repo: rafi/awesome-vim-colorschemes
+- repo: flazz/vim-colorschemes
 
 - repo: andymass/vim-matchup
   hook_add: 
@@ -120,3 +121,7 @@
 - { repo: haya14busa/incsearch.vim, on_map: { nv: <Plug> }}
 - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> }}
 - { repo: terryma/vim-expand-region, on_map: { x: <Plug> }}
+- repo: maxmellon/vim-jsx-pretty
+  hook_add: | 
+    let g:vim_jsx_pretty_colorful_config = 1
+

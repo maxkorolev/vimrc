@@ -7,7 +7,7 @@
   },
   "coc": {
     "preferences": {
-      "formatOnSaveFiletypes": ["scala", "typescript", "javascript", "css", "vue", "html"]
+      "formatOnSaveFiletypes": ["scala", "typescriptreact", "typescript", "javascript", "css", "vue", "html"]
     }
   },
   "list": {

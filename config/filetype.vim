@@ -14,6 +14,10 @@ augroup user_plugin_filetype " {{{
 	au BufRead,BufNewFile *.sbt set filetype=scala
 	au BufRead,BufNewFile *.conf set filetype=hocon
 
+
+	" set filetypes as typescriptreact
+	autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+
 	" Highlight current line only on focused window
 	autocmd WinEnter,InsertLeave * if &ft !~# 'denite' | set cursorline | endif
 	autocmd WinLeave,InsertEnter * if &ft !~# 'denite' | set nocursorline | endif
