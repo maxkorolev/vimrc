@@ -121,6 +121,7 @@
 - { repo: haya14busa/incsearch.vim, on_map: { nv: <Plug> }}
 - { repo: haya14busa/vim-asterisk, on_map: { nv: <Plug> }}
 - { repo: terryma/vim-expand-region, on_map: { x: <Plug> }}
+- repo: pangloss/vim-javascript
 - repo: maxmellon/vim-jsx-pretty
   hook_add: | 
     let g:vim_jsx_pretty_colorful_config = 1
