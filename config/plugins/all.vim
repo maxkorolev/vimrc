@@ -38,15 +38,15 @@ if dein#tap('vim-gitgutter')
 endif
 
 if dein#tap('vim-fugitive')
-	nmap <Leader>gst :Gstatus<cr>
-	nmap <Leader>gc :Gcommit<cr>
-	nmap <Leader>ga :Gwrite<cr>
-	nmap <Leader>gl :Glog<cr>
-	nmap <Leader>gol :0Glog<cr>
+	nmap <Leader>gst :Git<cr>
+	nmap <Leader>gc :Git commit<cr>
+	nmap <Leader>ga :Git write<cr>
+	nmap <Leader>gl :Gclog<cr>
+	nmap <Leader>gol :Gclog -- %<cr>
 	nmap <Leader>gd :Gdiff<cr>
-	nmap <Leader>gp :Gpull<cr>
-	nmap <Leader>gP :Gpush<cr>
-	nmap <Leader>gf :Gfetch<cr>
+	nmap <Leader>gp :Git pull<cr>
+	nmap <Leader>gP :Git push<cr>
+	nmap <Leader>gf :Git fetch<cr>
 	nmap <silent><Leader>gh :diffget //2<cr>
 	nmap <silent><Leader>gl :diffget //3<cr>
 endif

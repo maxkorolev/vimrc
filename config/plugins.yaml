@@ -3,7 +3,6 @@
 - repo: itchyny/vim-cursorword
 - repo: wsdjeg/dein-ui.vim
 - repo: rafi/awesome-vim-colorschemes
-- repo: flazz/vim-colorschemes
 
 - repo: andymass/vim-matchup
   hook_add: 
@@ -114,6 +113,8 @@
     let g:gitgutter_sign_allow_clobber = 0
     let g:gitgutter_sign_priority = 0
     let g:gitgutter_override_sign_column_highlight = 0
+
+- { repo: junkblocker/patchreview-vim}
 
 # ==========================================
 # Interface
