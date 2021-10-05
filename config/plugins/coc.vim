@@ -52,6 +52,10 @@ function! s:show_documentation()
 endfunction
 
 " Remap for rename current word
+nmap <Leader>i :CocCommand editor.action.organizeImport<CR>
+
+
+" Remap for rename current word
 nmap <Leader>rn <Plug>(coc-rename)
 " Fix autofix problem of current line
 nmap <leader>qf <Plug>(coc-fix-current)

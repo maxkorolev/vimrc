@@ -42,7 +42,7 @@ if dein#tap('vim-fugitive')
 	nmap <Leader>gc :Git commit<cr>
 	nmap <Leader>ga :Git write<cr>
 	nmap <Leader>gl :Gclog<cr>
-	nmap <Leader>gol :Gclog -- %<cr>
+	nmap <Leader>gol :0Gclog<cr>
 	nmap <Leader>gd :Gdiff<cr>
 	nmap <Leader>gp :Git pull<cr>
 	nmap <Leader>gP :Git push<cr>
