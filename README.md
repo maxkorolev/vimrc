@@ -1,13 +1,4 @@
-# vimrc
-sudo apt install python
-sudo apt install python3-venv
-sudo apt-get install python3-neovim
-sudo apt install python3-pip
-pip3 install --user pynvim
+# 💤 LazyVim
 
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-mv nvim.appimage nvim
-chmod u+x nvim
-sudo mv nvim /usr/local/bin/
-
-
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
