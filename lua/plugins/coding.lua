@@ -5,9 +5,9 @@ return {
 
     opts = {
       mappings = {
-        comment = "<C-/>",
-        comment_line = "<C-/>",
-        textobject = "<C-/>",
+        comment = "<C-_>",
+        comment_line = "<C-_>",
+        textobject = "<C-_>",
       },
     },
   },
@@ -22,7 +22,6 @@ return {
     opts = {
       ensure_installed = {
         "bash",
-        "help",
         "html",
         "javascript",
         "json",
@@ -39,6 +38,9 @@ return {
         "yaml",
       },
     },
+    init = function()
+      require("nvim-treesitter.install").compilers = { "clang", "gcc" }
+    end,
   },
   { "mfussenegger/nvim-dap" },
   {

@@ -1,3 +1,4 @@
+local Util = require("lazyvim.util")
 return {
 
   {
@@ -15,6 +16,7 @@ return {
         },
       },
       window = {
+        width = 60,
         mappings = {
           ["l"] = "open",
           ["h"] = "close_node",
@@ -36,7 +38,16 @@ return {
 
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<C-p>", "<leader>ff", desc = "Find Files (root dir)", remap = true },
+      { "<C-p>", "<leader>fF", desc = "Find Files (root dir)", remap = true },
+      {
+        "<leader>/",
+        function()
+          require("telescope.builtin").live_grep({ default_text = vim.fn.expand("<cword>") })
+        end,
+        desc = "Find in Files (Grep)",
+        mode = "n",
+      },
+      { "<leader>/", Util.telescope("grep_string"), desc = "Find in Files (Grep)", mode = "v" },
       { "<leader><leader>", false },
       { "<leader><space>", false },
     },
@@ -56,30 +67,11 @@ return {
           },
         },
       },
+      pickers = {
+        lsp_definitions = { show_line = false },
+        lsp_references = { show_line = false },
+      },
     },
-    init = function()
-      function vim.getVisualSelection()
-        vim.cmd('noau normal! "vy"')
-        local text = vim.fn.getreg("v")
-        vim.fn.setreg("v", {})
-
-        text = string.gsub(text, "\n", "")
-        if #text > 0 then
-          return text
-        else
-          return ""
-        end
-      end
-
-      local keymap = vim.keymap.set
-      local tb = require("telescope.builtin")
-      local opts = { noremap = true, silent = true }
-
-      keymap("v", "<Leader>/", function()
-        local text = vim.getVisualSelection()
-        tb.live_grep({ default_text = text })
-      end, opts)
-    end,
   },
   {
     "folke/trouble.nvim",
@@ -102,17 +94,6 @@ return {
       { "<silent><Leader>gl", "<cmd>diffget //3<cr>" },
     },
   },
-  { "kevinhwang91/nvim-bqf", ft = "qf" },
-  { "itchyny/vim-cursorword" },
-  { "christoomey/vim-tmux-navigator" },
-  { "kana/vim-operator-user" },
-  {
-    "kana/vim-operator-replace",
-    keys = {
-      { "p", "<Plug>(operator-replace)", desc = "Replace", mode = "x" },
-    },
-  },
-
   {
     "sodapopcan/vim-twiggy",
     dependencies = {
@@ -127,6 +108,32 @@ return {
       vim.g.twiggy_split_position = "topleft"
       vim.g.twiggy_local_branch_sort = "mru"
       vim.g.twiggy_remote_branch_sort = "date"
+    end,
+  },
+
+  {
+    "tveskag/nvim-blame-line",
+    init = function()
+      vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "EnableBlameLine" })
+    end,
+  },
+
+  { "kevinhwang91/nvim-bqf", ft = "qf" },
+  { "itchyny/vim-cursorword" },
+  { "kana/vim-operator-user" },
+  {
+    "kana/vim-operator-replace",
+    keys = {
+      { "p", "<Plug>(operator-replace)", desc = "Replace", mode = "x" },
+      { "p", "<Plug>(operator-replace)", desc = "Replace", mode = "v" },
+    },
+  },
+
+  {
+    "907th/vim-auto-save",
+    init = function()
+      vim.g.auto_save = 1
+      vim.g.auto_save_events = { "BufLeave", "FocusLost" }
     end,
   },
 }

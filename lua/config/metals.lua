@@ -43,6 +43,10 @@ map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>f", vim.lsp.buf.formatting)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
+map("n", "<leader>i", function()
+  require("metals").organize_imports()
+end)
+
 map("n", "<leader>ws", function()
   require("metals").hover_worksheet()
 end)
@@ -155,7 +159,7 @@ metals_config.settings = {
 -- you *have* to have a setting to display this in your statusline or else
 -- you'll not see any messages from metals. There is more info in the help
 -- docs about this
--- metals_config.init_options.statusBarProvider = "on"
+metals_config.init_options.statusBarProvider = "on"
 
 -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
 metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -196,6 +200,13 @@ api.nvim_create_autocmd("FileType", {
   pattern = { "scala", "sbt", "java" },
   callback = function()
     require("metals").initialize_or_attach(metals_config)
+
+    vim.cmd([[hi! link LspReferenceText CursorColumn]])
+    vim.cmd([[hi! link LspReferenceRead CursorColumn]])
+    vim.cmd([[hi! link LspReferenceWrite CursorColumn]])
+    vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
+    vim.cmd([[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]])
+    vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
   end,
   group = nvim_metals_group,
 })
