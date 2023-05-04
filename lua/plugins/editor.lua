@@ -77,16 +77,18 @@ return {
     "folke/trouble.nvim",
     enabled = false,
   },
+  -- git
   { "romainl/vim-cool" },
   {
     "tpope/vim-fugitive",
+    lazy = true,
     keys = {
       { "<Leader>gst", "<cmd>Git<cr>" },
       { "<Leader>gc", "<cmd>Git commit<cr>" },
       { "<Leader>ga", "<cmd>Git write<cr>" },
       { "<Leader>gl", "<cmd>Gclog<cr>" },
       { "<Leader>gol", "<cmd>0Gclog<cr>" },
-      { "<Leader>gd", "<cmd>Gdiff<cr>" },
+      -- { "<Leader>gd", "<cmd>Gdiff<cr>" },
       { "<Leader>gp", "<cmd>Git pull<cr>" },
       { "<Leader>gP", "<cmd>Git push<cr>" },
       { "<Leader>gf", "<cmd>Git fetch<cr>" },
@@ -117,6 +119,47 @@ return {
       vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "EnableBlameLine" })
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    lazy = true,
+
+    keys = {
+      { "<Leader>gd", "<cmd>DiffviewOpen<cr>" },
+    },
+    opts = {
+      keymaps = {
+        view = {
+          ["q"] = "<cmd>DiffviewClose<cr>",
+        },
+        file_panel = {
+          ["q"] = "<cmd>DiffviewClose<cr>",
+        },
+        file_history_panel = {
+          ["q"] = "<cmd>DiffviewClose<cr>",
+        },
+      },
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+
+    opts = {
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+        end
+
+        -- stylua: ignore start
+        map("n", "]g", gs.next_hunk, "Next Hunk")
+        map("n", "[g", gs.prev_hunk, "Prev Hunk")
+        map('n', '<leader>gr', gs.reset_hunk, "Reset Hunk")
+        map("n", "<leader>gv", gs.preview_hunk, "Preview Hunk")
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      end,
+    },
+  },
 
   { "kevinhwang91/nvim-bqf", ft = "qf" },
   { "itchyny/vim-cursorword" },
@@ -136,4 +179,5 @@ return {
       vim.g.auto_save_events = { "BufLeave", "FocusLost" }
     end,
   },
+  { "folke/which-key.nvim", enabled = false },
 }
