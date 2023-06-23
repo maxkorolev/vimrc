@@ -24,3 +24,7 @@
 -- })
 -- Server capabilities spec:
 -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "rust" },
+  command = [[%s/\s\+$//e]],
+})

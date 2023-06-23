@@ -7,3 +7,10 @@ vim.keymap.set("n", "<CR>", "za", { silent = true })
 
 vim.keymap.set("n", "}", "<cmd>cnext<cr>", { silent = true })
 vim.keymap.set("n", "{", "<cmd>cprevious<cr>", { silent = true })
+
+vim.keymap.set("n", "<A-j>", "")
+vim.keymap.set("n", "<A-k>", "")
+vim.keymap.set("i", "<A-j>", "")
+vim.keymap.set("i", "<A-k>", "")
+vim.keymap.set("v", "<A-j>", "")
+vim.keymap.set("v", "<A-k>", "")

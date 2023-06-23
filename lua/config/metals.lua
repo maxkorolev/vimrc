@@ -43,14 +43,6 @@ map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>f", vim.lsp.buf.formatting)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
-map("n", "<leader>i", function()
-  require("metals").organize_imports()
-end)
-
-map("n", "<leader>ws", function()
-  require("metals").hover_worksheet()
-end)
-
 -- all workspace diagnostics
 map("n", "<leader>aa", vim.diagnostic.setqflist)
 
@@ -201,6 +193,14 @@ api.nvim_create_autocmd("FileType", {
   callback = function()
     require("metals").initialize_or_attach(metals_config)
 
+    map("n", "<leader>i", function()
+      require("metals").organize_imports()
+    end)
+
+    map("n", "<leader>ws", function()
+      require("metals").hover_worksheet()
+    end)
+
     vim.cmd([[hi! link LspReferenceText CursorColumn]])
     vim.cmd([[hi! link LspReferenceRead CursorColumn]])
     vim.cmd([[hi! link LspReferenceWrite CursorColumn]])
@@ -210,3 +210,9 @@ api.nvim_create_autocmd("FileType", {
   end,
   group = nvim_metals_group,
 })
+
+local hocon_group = vim.api.nvim_create_augroup("hocon", { clear = true })
+vim.api.nvim_create_autocmd(
+  { "BufNewFile", "BufRead" },
+  { group = hocon_group, pattern = "*/resources/*.conf", command = "set ft=hocon" }
+)

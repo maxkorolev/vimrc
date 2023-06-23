@@ -133,6 +133,9 @@ return {
         },
         file_panel = {
           ["q"] = "<cmd>DiffviewClose<cr>",
+          -- ["<cr>"] = function()
+          --   require("diffview.actions").goto_file_edit()
+          -- end,
         },
         file_history_panel = {
           ["q"] = "<cmd>DiffviewClose<cr>",
