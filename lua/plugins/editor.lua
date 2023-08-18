@@ -9,7 +9,7 @@ return {
     opts = {
       filesystem = {
         bind_to_cwd = false,
-        follow_current_file = true,
+        follow_current_file = { enabled = true },
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,
@@ -27,7 +27,7 @@ return {
           event = "file_opened",
           handler = function()
             --auto close
-            require("neo-tree").close_all()
+            require("neo-tree.command").execute({ action = "close" })
           end,
         },
       },
@@ -38,7 +38,7 @@ return {
 
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<C-p>", "<leader>fF", desc = "Find Files (root dir)", remap = true },
+      { "<C-p>",            "<leader>fF",                  desc = "Find Files (root dir)", remap = true },
       {
         "<leader>/",
         function()
@@ -47,9 +47,9 @@ return {
         desc = "Find in Files (Grep)",
         mode = "n",
       },
-      { "<leader>/", Util.telescope("grep_string"), desc = "Find in Files (Grep)", mode = "v" },
+      { "<leader>/",        Util.telescope("grep_string"), desc = "Find in Files (Grep)",  mode = "v" },
       { "<leader><leader>", false },
-      { "<leader><space>", false },
+      { "<leader><space>",  false },
     },
 
     opts = {
@@ -74,6 +74,10 @@ return {
     },
   },
   {
+    "folke/flash.nvim",
+    enabled = false,
+  },
+  {
     "folke/trouble.nvim",
     enabled = false,
   },
@@ -83,15 +87,15 @@ return {
     "tpope/vim-fugitive",
     lazy = true,
     keys = {
-      { "<Leader>gst", "<cmd>Git<cr>" },
-      { "<Leader>gc", "<cmd>Git commit<cr>" },
-      { "<Leader>ga", "<cmd>Git write<cr>" },
-      { "<Leader>gl", "<cmd>Gclog<cr>" },
-      { "<Leader>gol", "<cmd>0Gclog<cr>" },
+      { "<Leader>gst",        "<cmd>Git<cr>" },
+      { "<Leader>gc",         "<cmd>Git commit<cr>" },
+      { "<Leader>ga",         "<cmd>Git write<cr>" },
+      { "<Leader>gl",         "<cmd>Gclog<cr>" },
+      { "<Leader>gol",        "<cmd>0Gclog<cr>" },
       -- { "<Leader>gd", "<cmd>Gdiff<cr>" },
-      { "<Leader>gp", "<cmd>Git pull<cr>" },
-      { "<Leader>gP", "<cmd>Git push<cr>" },
-      { "<Leader>gf", "<cmd>Git fetch<cr>" },
+      { "<Leader>gp",         "<cmd>Git pull<cr>" },
+      { "<Leader>gP",         "<cmd>Git push<cr>" },
+      { "<Leader>gf",         "<cmd>Git fetch<cr>" },
       { "<silent><Leader>gh", "<cmd>diffget //2<cr>" },
       { "<silent><Leader>gl", "<cmd>diffget //3<cr>" },
     },

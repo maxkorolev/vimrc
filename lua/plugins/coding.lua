@@ -1,15 +1,13 @@
 return {
 
+  -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+  },
   {
     "echasnovski/mini.comment",
-
-    opts = {
-      mappings = {
-        comment = "<C-_>",
-        comment_line = "<C-_>",
-        textobject = "<C-_>",
-      },
-    },
+    enabled = false,
   },
   {
     "echasnovski/mini.pairs",
@@ -44,7 +42,6 @@ return {
       require("nvim-treesitter.install").compilers = { "clang", "gcc" }
     end,
   },
-  { "mfussenegger/nvim-dap" },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -53,6 +50,7 @@ return {
       { "hrsh7th/vim-vsnip" },
     },
   },
+  { "nathangrigg/vim-beancount" },
   {
     "scalameta/nvim-metals",
     dependencies = {
@@ -97,6 +95,20 @@ return {
           -- Code action groups
           vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
         end,
+      },
+    },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    keys = {
+      { "<leader>i", "<cmd>TypescriptOrganizeImports<CR>", desc = "Organize Imports" },
+      { "<leader>rn", "<cmd>TypescriptRenameFile<CR>", desc = "Rename File" },
+    },
+    opts = {
+      -- make sure mason installs the server
+      servers = {
+        ---@type lspconfig.options.tsserver
+        tsserver = {},
       },
     },
   },
