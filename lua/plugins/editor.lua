@@ -38,7 +38,7 @@ return {
 
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<C-p>",            "<leader>fF",                  desc = "Find Files (root dir)", remap = true },
+      { "<C-p>", "<leader>fF", desc = "Find Files (root dir)", remap = true },
       {
         "<leader>/",
         function()
@@ -47,9 +47,9 @@ return {
         desc = "Find in Files (Grep)",
         mode = "n",
       },
-      { "<leader>/",        Util.telescope("grep_string"), desc = "Find in Files (Grep)",  mode = "v" },
+      { "<leader>/", Util.telescope("grep_string"), desc = "Find in Files (Grep)", mode = "v" },
       { "<leader><leader>", false },
-      { "<leader><space>",  false },
+      { "<leader><space>", false },
     },
 
     opts = {
@@ -62,6 +62,7 @@ return {
               return require("telescope.actions").close(...)
             end,
             ["<C-s>"] = function(...)
+              vim.cmd("cexpr []")
               return require("telescope.actions").add_to_qflist(...)
             end,
           },
@@ -72,6 +73,21 @@ return {
         lsp_references = { show_line = false },
       },
     },
+  },
+  {
+    "ThePrimeagen/harpoon",
+
+    config = function()
+      require("harpoon").setup({
+        menu = {
+          width = vim.api.nvim_win_get_width(0) - 50,
+        },
+      })
+      vim.api.nvim_set_keymap("n", ";q", ":lua require('harpoon.mark').add_file()<CR>", { silent = true })
+      vim.api.nvim_set_keymap("n", ";s", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { silent = true })
+      vim.api.nvim_set_keymap("n", "<S-i>", ":lua require('harpoon.ui').nav_next()<CR>", { silent = true })
+      vim.api.nvim_set_keymap("n", "<S-o>", ":lua require('harpoon.ui').nav_prev()<CR>", { silent = true })
+    end,
   },
   {
     "folke/flash.nvim",
@@ -87,15 +103,15 @@ return {
     "tpope/vim-fugitive",
     lazy = true,
     keys = {
-      { "<Leader>gst",        "<cmd>Git<cr>" },
-      { "<Leader>gc",         "<cmd>Git commit<cr>" },
-      { "<Leader>ga",         "<cmd>Git write<cr>" },
-      { "<Leader>gl",         "<cmd>Gclog<cr>" },
-      { "<Leader>gol",        "<cmd>0Gclog<cr>" },
+      { "<Leader>gst", "<cmd>Git<cr>" },
+      { "<Leader>gc", "<cmd>Git commit<cr>" },
+      { "<Leader>ga", "<cmd>Git write<cr>" },
+      { "<Leader>gl", "<cmd>Gclog<cr>" },
+      { "<Leader>gol", "<cmd>0Gclog<cr>" },
       -- { "<Leader>gd", "<cmd>Gdiff<cr>" },
-      { "<Leader>gp",         "<cmd>Git pull<cr>" },
-      { "<Leader>gP",         "<cmd>Git push<cr>" },
-      { "<Leader>gf",         "<cmd>Git fetch<cr>" },
+      { "<Leader>gp", "<cmd>Git pull<cr>" },
+      { "<Leader>gP", "<cmd>Git push<cr>" },
+      { "<Leader>gf", "<cmd>Git fetch<cr>" },
       { "<silent><Leader>gh", "<cmd>diffget //2<cr>" },
       { "<silent><Leader>gl", "<cmd>diffget //3<cr>" },
     },
@@ -159,11 +175,11 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", "]g", gs.next_hunk, "Next Hunk")
-        map("n", "[g", gs.prev_hunk, "Prev Hunk")
-        map('n', '<leader>gr', gs.reset_hunk, "Reset Hunk")
-        map("n", "<leader>gv", gs.preview_hunk, "Preview Hunk")
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        map( "n", "]g", gs.next_hunk, "Next Hunk")
+        map( "n", "[g", gs.prev_hunk, "Prev Hunk")
+        map( 'n', '<leader>gr', gs.reset_hunk, "Reset Hunk")
+        map( "n", "<leader>gv", gs.preview_hunk, "Preview Hunk")
+        map( { "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
   },
@@ -187,4 +203,39 @@ return {
     end,
   },
   { "folke/which-key.nvim", enabled = false },
+
+  {
+    "tpope/vim-dadbod",
+    opt = true,
+    requires = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+      require("config.dadbod").setup()
+    end,
+  },
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
+    },
+    keys = {
+      { "<Leader>dbu", "<Cmd>DBUIToggle<Cr>", "Toggle UI" },
+      { "<Leader>dbf", "<Cmd>DBUIFindBuffer<Cr>", "Find buffer" },
+      { "<Leader>dbr", "<Cmd>DBUIRenameBuffer<Cr>", "Rename buffer" },
+      { "<Leader>dbq", "<Cmd>DBUILastQueryInfo<Cr>", "Last query info" },
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
 }

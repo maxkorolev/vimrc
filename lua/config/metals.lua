@@ -181,6 +181,8 @@ dap.configurations.scala = {
 
 metals_config.on_attach = function(client, bufnr)
   require("metals").setup_dap()
+
+  client.server_capabilities.semanticTokensProvider = nil
 end
 
 -- Autocmd that will actually be in charging of starting the whole thing

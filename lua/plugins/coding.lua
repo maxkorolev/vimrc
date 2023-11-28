@@ -43,6 +43,12 @@ return {
     end,
   },
   {
+    "johmsalas/text-case.nvim",
+    config = function()
+      require("textcase").setup({})
+    end,
+  },
+  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       { "hrsh7th/cmp-nvim-lsp" },
@@ -108,7 +114,11 @@ return {
       -- make sure mason installs the server
       servers = {
         ---@type lspconfig.options.tsserver
-        tsserver = {},
+        tsserver = {
+          on_attach = function(client)
+            client.server_capabilities.semanticTokensProvider = nil
+          end,
+        },
       },
     },
   },
@@ -117,7 +127,6 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
-        ---@type lspconfig.options.tsserver
         pyright = {},
       },
     },
