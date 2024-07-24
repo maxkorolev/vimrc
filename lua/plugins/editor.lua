@@ -47,7 +47,14 @@ return {
         desc = "Find in Files (Grep)",
         mode = "n",
       },
-      { "<leader>/", Util.telescope("grep_string"), desc = "Find in Files (Grep)", mode = "v" },
+      {
+        "<leader>/",
+        function()
+          Util.telescope("grep_string")
+        end,
+        desc = "Find in Files (Grep)",
+        mode = "v",
+      },
       { "<leader><leader>", false },
       { "<leader><space>", false },
     },
@@ -80,7 +87,7 @@ return {
     config = function()
       require("harpoon").setup({
         menu = {
-          width = vim.api.nvim_win_get_width(0) - 50,
+          width = vim.api.nvim_win_get_width(0) - 20,
         },
       })
       vim.api.nvim_set_keymap("n", ";q", ":lua require('harpoon.mark').add_file()<CR>", { silent = true })
@@ -93,10 +100,10 @@ return {
     "folke/flash.nvim",
     enabled = false,
   },
-  {
-    "folke/trouble.nvim",
-    enabled = false,
-  },
+  -- {
+  --   "folke/trouble.nvim",
+  --   enabled = false,
+  -- },
   -- git
   { "romainl/vim-cool" },
   {
