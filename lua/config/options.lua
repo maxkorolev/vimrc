@@ -10,3 +10,6 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.autowriteall = true
 vim.opt.joinspaces = false
+
+vim.g.snacks_animate = false
+vim.g.lazyvim_picker = "fzf"

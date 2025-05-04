@@ -14,7 +14,7 @@ return {
     enabled = false,
   },
 
-  { "ray-x/cmp-treesitter" },
+  -- { "ray-x/cmp-treesitter" },
 
   -- add more treesitter parsers
   {
@@ -68,6 +68,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     dependencies = {
       -- { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-vsnip" },
@@ -80,6 +81,7 @@ return {
       cmp.setup({
         sources = {
           { name = "nvim_lsp" },
+          { name = "supermaven" },
           -- { name = "vsnip" },
           { name = "treesitter" },
         },
@@ -96,20 +98,20 @@ return {
           -- snippets you need to remove this select
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
           -- I use tabs... some say you should stick to ins-completion but this is just here as an example
-          ["<Tab>"] = function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end,
-          ["<S-Tab>"] = function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end,
+          -- ["<Tab>"] = function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   else
+          --     fallback()
+          --   end
+          -- end,
+          -- ["<S-Tab>"] = function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_prev_item()
+          --   else
+          --     fallback()
+          --   end
+          -- end,
         }),
       })
     end,
@@ -127,6 +129,7 @@ return {
     ft = { "scala", "sbt", "java" },
     opts = function()
       local metals_config = require("metals").bare_config()
+      metals_config.init_options.enableSemanticDB = false
 
       -- Example of settings
       metals_config.settings = {
@@ -147,7 +150,7 @@ return {
       metals_config.init_options.statusBarProvider = "off"
 
       -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
-      metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- metals_config.on_attach = function(client, bufnr)
       --   require("metals").setup_dap()
@@ -301,6 +304,33 @@ return {
         pyright = {},
       },
     },
+  },
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+
+        keymaps = {
+          accept_suggestion = "<Tab>",
+          clear_suggestion = "<S-Tab>",
+        },
+      })
+    end,
+  },
+  {
+    "frankroeder/parrot.nvim",
+    dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
+    -- optionally include "folke/noice.nvim" or "rcarriga/nvim-notify" for beautiful notifications
+    config = function()
+      require("parrot").setup({
+        -- Providers must be explicitly added to make them available.
+        providers = {
+          openai = {
+            api_key = os.getenv("OPENAI_API_KEY"),
+          },
+        },
+      })
+    end,
   },
   -- {
   --   "lukas-reineke/lsp-format.nvim",

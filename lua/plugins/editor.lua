@@ -3,6 +3,7 @@ return {
 
   {
     "nvim-neo-tree/neo-tree.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { ";a", "<leader>E", desc = "Explorer NeoTree (cwd)", remap = true },
     },
@@ -35,8 +36,51 @@ return {
   },
 
   {
+    "ibhagwan/fzf-lua",
+    enabled = true,
+    lazy = false,
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- or if using mini.icons/mini.nvim
+    -- dependencies = { "echasnovski/mini.icons" },
+    config = function()
+      local actions = require("fzf-lua").actions
+      vim.keymap.set("n", "<C-p>", '<cmd>lua require("fzf-lua").files()<CR>', { noremap = true, silent = true })
+      -- Visual mode mappings
+      vim.keymap.set("v", "<leader>/", function()
+        require("fzf-lua").grep_visual()
+      end, { desc = "Grep visual selection" })
+
+      -- vim.keymap.set("v", "<leader>/", function()
+      --   require("fzf-lua").live_grep_visual()
+      -- end, { desc = "Live grep visual selection" })
+      require("fzf-lua").setup({
+
+        winopts = {
+          preview = {
+            layout = "vertical",
+            vertical = "up:30%",
+          },
+        },
+        fzf_opts = {
+          ["--layout"] = false,
+        },
+        grep = {
+          actions = {
+            ["ctrl-s"] = {
+              fn = actions.file_sel_to_qf,
+              prefix = "select-all+",
+            },
+          },
+        },
+      })
+    end,
+  },
+
+  {
 
     "nvim-telescope/telescope.nvim",
+    enabled = false,
     keys = {
       { "<C-p>", "<leader>fF", desc = "Find Files (root dir)", remap = true },
       {
@@ -210,9 +254,30 @@ return {
     end,
   },
   { "folke/which-key.nvim", enabled = false },
+  {
+
+    "kndndrj/nvim-dbee",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install("curl")
+    end,
+    config = function()
+      require("dbee").setup({
+        sources = {
+          require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
+        },
+      })
+    end,
+  },
 
   {
     "tpope/vim-dadbod",
+    enabled = false,
     opt = true,
     requires = {
       "kristijanhusak/vim-dadbod-ui",
@@ -224,6 +289,7 @@ return {
   },
   {
     "kristijanhusak/vim-dadbod-ui",
+    enabled = false,
     dependencies = {
       { "tpope/vim-dadbod", lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
