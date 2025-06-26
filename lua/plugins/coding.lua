@@ -68,7 +68,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       -- { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-vsnip" },
@@ -306,6 +306,50 @@ return {
     },
   },
   {
+    "olimorris/codecompanion.nvim",
+    opts = {},
+    keys = {
+      { "<leader>c", "<cmd>CodeCompanionChat<CR>", desc = "Code Companion Chat" },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "ravitemer/mcphub.nvim",
+    },
+    config = function()
+      require("codecompanion").setup({
+        workspace_file = "workspace-schema.json", -- Path to your workspace file
+        strategies = {
+          chat = {
+            adapter = "anthropic",
+            keymaps = {
+              close = {
+                modes = { n = "q" },
+              },
+              stop = {
+                modes = { n = "<C-c>", i = "<C-c>" },
+              },
+              -- Add further custom keymaps here
+            },
+          },
+          inline = {
+            adapter = "anthropic",
+          },
+        },
+        extensions = {
+          mcphub = {
+            callback = "mcphub.extensions.codecompanion",
+            opts = {
+              make_vars = true,
+              make_slash_commands = true,
+              show_result_in_chat = true,
+            },
+          },
+        },
+      })
+    end,
+  },
+  {
     "supermaven-inc/supermaven-nvim",
     config = function()
       require("supermaven-nvim").setup({
@@ -319,6 +363,7 @@ return {
   },
   {
     "frankroeder/parrot.nvim",
+    enabled = false,
     dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
     -- optionally include "folke/noice.nvim" or "rcarriga/nvim-notify" for beautiful notifications
     config = function()
@@ -334,6 +379,7 @@ return {
   },
   {
     "yetone/avante.nvim",
+    enabled = false,
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
